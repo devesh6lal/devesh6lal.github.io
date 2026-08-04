@@ -990,9 +990,14 @@ a {
   gap: 50px;
 }
 
-.footer-logo{
-    width:150px;
-    height:auto;
+.footer-logo {
+  display: block;
+  width: 150px;
+  height: auto;
+  padding: 10px 14px;
+  background: #ffffff;
+  border-radius: 12px;
+  object-fit: contain;
 }
 
 .footer-about {
