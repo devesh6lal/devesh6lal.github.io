@@ -1385,3 +1385,26 @@ a {
 :root {
     color-scheme: light;
 }
+
+@media (prefers-color-scheme: dark) {
+  .site-header {
+    background: rgba(4, 17, 44, 0.94);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .brand img {
+    filter: brightness(1.8) contrast(1.15);
+  }
+
+  .nav-toggle {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+  }
+
+  .gradient-text {
+    background: linear-gradient(90deg, #79e8ff, #2b82ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
