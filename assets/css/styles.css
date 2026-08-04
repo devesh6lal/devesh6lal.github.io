@@ -990,14 +990,9 @@ a {
   gap: 50px;
 }
 
-.footer-logo {
-  display: block;
-  width: 240px;
-  height: auto;
-  padding: 0;
-  border-radius: 0;
-  background: transparent;
-  object-fit: contain;
+.footer-logo{
+    width:150px;
+    height:auto;
 }
 
 .footer-about {
