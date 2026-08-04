@@ -991,10 +991,13 @@ a {
 }
 
 .footer-logo {
-  width: 235px;
-  padding: 10px;
-  border-radius: 14px;
-  background: #fff;
+  display: block;
+  width: 240px;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  object-fit: contain;
 }
 
 .footer-about {
