@@ -3,40 +3,54 @@
   const toggle = document.querySelector('[data-nav-toggle]');
   const nav = document.querySelector('[data-nav]');
 
- 
-  
-  const closeMenu = () => {
+  const setMenuState = open => {
     if (!nav || !toggle) return;
-    nav.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-    body.classList.remove('menu-open');
+
+    nav.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+    body.classList.toggle('menu-open', open);
   };
+
+  const closeMenu = () => setMenuState(false);
 
   if (toggle && nav) {
     toggle.addEventListener('click', () => {
-      const opening = !nav.classList.contains('open');
-      nav.classList.toggle('open', opening);
-      toggle.setAttribute('aria-expanded', String(opening));
-      body.classList.toggle('menu-open', opening);
+      setMenuState(!nav.classList.contains('open'));
     });
 
-    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', event => {
+      if (!nav.classList.contains('open')) return;
+      if (nav.contains(event.target) || toggle.contains(event.target)) return;
+      closeMenu();
+    });
 
     document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') closeMenu();
+      if (event.key === 'Escape') {
+        closeMenu();
+        toggle.focus();
+      }
     });
 
     window.addEventListener('resize', () => {
       if (window.innerWidth > 980) closeMenu();
     });
+
+    window.addEventListener('pageshow', closeMenu);
   }
 
-  document.querySelectorAll('[data-year]').forEach(el => {
-    el.textContent = new Date().getFullYear();
+  document.querySelectorAll('[data-year]').forEach(element => {
+    element.textContent = new Date().getFullYear();
   });
 
   const revealItems = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && revealItems.length) {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion && 'IntersectionObserver' in window && revealItems.length) {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -52,12 +66,20 @@
   }
 
   const emailForm = document.querySelector('[data-email-form]');
+
   if (emailForm) {
     emailForm.addEventListener('submit', event => {
       event.preventDefault();
+
+      if (!emailForm.checkValidity()) {
+        emailForm.reportValidity();
+        return;
+      }
+
       const data = new FormData(emailForm);
       const name = String(data.get('name') || '').trim();
       const email = String(data.get('email') || '').trim();
+      const company = String(data.get('company') || '').trim();
       const phone = String(data.get('phone') || '').trim();
       const service = String(data.get('service') || '').trim();
       const message = String(data.get('message') || '').trim();
@@ -66,6 +88,7 @@
       const bodyText = [
         `Name: ${name}`,
         `Email: ${email}`,
+        `Organisation: ${company || 'Not provided'}`,
         `Phone: ${phone || 'Not provided'}`,
         `Service: ${service || 'Not selected'}`,
         '',

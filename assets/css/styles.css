@@ -1245,3 +1245,134 @@ a {
     flex-direction: column;
   }
 }
+
+/* Production accessibility and content additions */
+[id] {
+  scroll-margin-top: 110px;
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid var(--cyan-500);
+  outline-offset: 3px;
+}
+
+.site-nav a:not(.button)[aria-current="page"] {
+  color: var(--blue-700);
+}
+
+.optional {
+  color: var(--muted);
+  font-size: 0.84em;
+  font-weight: 600;
+}
+
+.consent-field {
+  margin-top: 2px;
+}
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 500 !important;
+  line-height: 1.55;
+}
+
+.consent input {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  margin-top: 3px;
+  accent-color: var(--blue-600);
+}
+
+.consent a,
+.legal-content a {
+  color: var(--blue-700);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.compact-hero {
+  padding-top: 76px;
+  padding-bottom: 76px;
+}
+
+.legal-content {
+  width: min(calc(100% - 40px), 850px);
+  color: var(--text);
+}
+
+.legal-content h2 {
+  margin: 38px 0 10px;
+  color: var(--ink);
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1.25;
+}
+
+.legal-content p,
+.legal-content li {
+  font-size: 1.02rem;
+}
+
+.legal-content ul {
+  margin: 12px 0 0;
+  padding-left: 24px;
+}
+
+.legal-content li + li {
+  margin-top: 7px;
+}
+
+.legal-updated {
+  margin-top: 0;
+  color: var(--muted);
+}
+
+.legal-note {
+  margin-top: 42px;
+}
+
+@media (max-width: 980px) {
+  .site-nav a:not(.button)[aria-current="page"] {
+    background: var(--surface-alt);
+  }
+}
+
+@media (max-width: 700px) {
+  .legal-content {
+    width: min(calc(100% - 28px), 850px);
+  }
+}
+
+.consent input { padding: 0; border-radius: 4px; box-shadow: none; }
+
+.not-found-main {
+  min-height: calc(100vh - 84px - 115px);
+}
+
+.not-found-hero {
+  min-height: 620px;
+  display: grid;
+  align-items: center;
+  text-align: center;
+}
+
+.not-found-hero p {
+  margin-inline: auto;
+}
+
+.not-found-actions {
+  justify-content: center;
+}
+
+.compact-footer {
+  padding-top: 0;
+}
+
+.compact-footer-bottom {
+  margin-top: 0;
+}
