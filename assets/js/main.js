@@ -3,44 +3,7 @@
   const toggle = document.querySelector('[data-nav-toggle]');
   const nav = document.querySelector('[data-nav]');
 
-const updateActiveNavigation = () => {
-  if (!nav) return;
-
-  const links = [...nav.querySelectorAll('a:not(.button)')];
-  const currentFile =
-    window.location.pathname.split('/').pop() || 'index.html';
-  const currentHash = window.location.hash;
-
-  links.forEach(link => link.removeAttribute('aria-current'));
-
-  let activeLink;
-
-  if (currentHash === '#about') {
-    activeLink = links.find(link =>
-      link.getAttribute('href').endsWith('#about')
-    );
-  } else {
-    activeLink = links.find(link => {
-      const href = link.getAttribute('href');
-
-      return (
-        href === currentFile ||
-        (currentFile === '' && href === 'index.html')
-      );
-    });
-  }
-
-  if (activeLink) {
-    activeLink.setAttribute('aria-current', 'page');
-  }
-};
-
-updateActiveNavigation();
-
-window.addEventListener(
-  'hashchange',
-  updateActiveNavigation
-);
+ 
   
   const closeMenu = () => {
     if (!nav || !toggle) return;
