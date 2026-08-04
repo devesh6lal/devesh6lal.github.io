@@ -992,7 +992,7 @@ a {
 
 .footer-logo {
     display: inline-block;
-    width: 170px;      /* Keep it a nice readable size */
+    width: 150px;      /* Keep it a nice readable size */
     height: auto;
     padding: 8px;
     background: #ffffff;
